@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+
+    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+   document.addEventListener("deviceready", onDeviceReady, false);
+
+    var watchID = null;
+
+
+    function onDeviceReady() {
+        // Update every 3 seconds
+        var options = { frequency: 3000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML ='Latitude: ' + position.coords.latitude + '<br />' +
+                       'Longitude: ' + position.coords.longitude + '<br />' +
+                       '<hr />'      + element.innerHTML;
+    }
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+    </script>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+    <nav class="main-menu">
+        <a href="Instagram.html">Instagram</a>
+        <a href="flickr.html">Flickr</a>
+        <a href="Map.html">Map Demo</a>
+        <a href="Accelerometer.html">Accelerometer</a>
+        <a href="Compass.html">Compass</a>
+        <a href="Location.html">Location</a>
+        <a href="Notifications.html">Notifications</a>
+        
+        
+        
+    </nav><!--#main-menu-->
+
+    <header>
+        <div class="main-menu-button main-menu-button-left"><a class="menu">&nbsp;</a></div>
+        <h1>API Mashup</h1>
+    </header>
+
+    <div class="app-content">
+  <body>
+    <p id="geolocation">Here are your coordinates.</p>
+  </body>
+</html>
