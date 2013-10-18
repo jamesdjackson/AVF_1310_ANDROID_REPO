@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+/Users/jamesjackson/Desktop/AVF_1310_ANDROID_REPO/.metadata/.plugins/org.eclipse.jdt.core
+913243815.index
