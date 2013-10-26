@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-
-<!--James Jackson-->
-<!--AVF 1310-->
-<!--Project 1-->
-
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<head>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+    <title>Notifications</title>
     <meta charset="utf-8">
     <title>API Mashup Demo</title>
     <meta name="description" content="">
@@ -14,32 +10,48 @@
     <script src="js/jQuery2.0.2.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script src="js/main.min.js"></script>
-</head>
-<body>
+    <script type="text/javascript" charset="utf-8" src="js/phonegap.js"></script>
+    <script type="text/javascript" charset="utf-8"></script>
+    <script>
+    
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-<div class="app-wrapper">
+    var watchID = null;
+    function onDeviceReady() {
+        var options = { frequency: 3000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+    }
 
-    <nav class="main-menu">
-        <a href="Instagram.html">Instagram</a>
-        <a href="flickr.html">Flickr</a>
-        <a href="Map.html">Map Demo</a>
-        <a href="Accelerometer.html">Accelerometer</a>
-        <a href="Compass.html">Compass</a>
-        <a href="Location.html">Location</a>
-        <a href="Notifications.html">Notifications</a>
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML ='Latitude: ' + position.coords.latitude + '<br />' +
+                            'Longitude: ' + position.coords.longitude + '<br />' +
+                            '<hr />'      + element.innerHTML;
+    }
+
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    </script>
+        </head>
+    <div class="app-wrapper">
         
-    </nav><!--#main-menu-->
-
-    <header>
-        <div class="main-menu-button main-menu-button-left"><a class="menu">&nbsp;</a></div>
-        <h1>API Mashup</h1>
-    </header>
-
-    <div class="app-content">
-  <body>
-    <p id="geolocation">Here are your coordinates.</p>
+        <nav class="main-menu">
+            <a href="index.html">Home</a>
+            <a href="flickr.html">Flickr</a>
+            <a href="Instagram.html">Instagram</a>
+            <a href="Location.html">Location</a>
+            <a href="Map.html">Map</a>
+        </nav>
+        
+        <header>
+            <div class="main-menu-button main-menu-button-left"><a class="menu">&nbsp;</a></div>
+            <h1>Notifications</h1>
+        </header>
+        
+        <div class="app-content">
+    <p id="geolocation">Watching geolocation...</p>
   </body>
-<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-<script type="text/javascript" charset="utf-8" src="main.js"></script>
-<script type="text/javascript" charset="utf-8">
 </html>
