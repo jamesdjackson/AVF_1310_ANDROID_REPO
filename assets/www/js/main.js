@@ -28,7 +28,6 @@ Instagram.Config = {
 
 
 
-
 (function(){
     var photoTemplate, resource;
 
@@ -184,27 +183,46 @@ function onError() {
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   document.addEventListener("deviceready", onDeviceReady, false);
+function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+}
 
-    var watchID = null;
+function onDeviceReady() {
+}
+
+function showAlert() {
+    navigator.notification.alert(
+        'Game Over!',  // message
+        alertCallback,   //callback
+        'Game Over',            // title
+        'Done'                  // buttonName
+    );
+}
 
 
-    function onDeviceReady() {
-        // Update every 3 seconds
-        var options = { frequency: 3000 };
-        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-    }
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML ='Latitude: ' + position.coords.latitude + '<br />' +
-                       'Longitude: ' + position.coords.longitude + '<br />' +
-                       '<hr />'      + element.innerHTML;
-    }
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-    </script>
+function alertCallback(){
+}
+
+
+function onConfirm(button) {
+    alert('You selected button ' + button);
+}
+
+
+function showConfirm() {
+    navigator.notification.confirm(
+        'Game Over!',  // message
+        onConfirm,     // callback to invoke with index of button pressed
+        'Game Over',   // title
+        'Restart,Exit' // buttonLabels
+    );
+}
+function playBeep() {
+    navigator.notification.beep(2);
+}
+function vibrate() {
+    navigator.notification.vibrate(4000);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -243,4 +261,16 @@ function onError() {
     alert('oooops!');
 }
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+app.controller('mash1Ctrl', function ($scope) {
+               
+               $scope.geoMash = function(position) {
+               $scope.latitude = position.coords.latitude;
+               $scope.longitude = position.coords.longitude;
+               };
+               
+               });
 
